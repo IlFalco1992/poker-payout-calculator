@@ -45,7 +45,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Payout</th>
+                    <th scope="col">Payout <b>(Totale <span id="total"></span>)</b></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,6 +73,7 @@
             $("#payouts-table tbody").empty();
             var players = $("#players-number").val();
             var buyIn = $("#buy-in").val();
+            $("#total").html(players*buyIn);
             var payout_percentages = [];
             if (players <= 10)
                 payout_percentages = [.5, .3, .2, 0, 0];
@@ -96,7 +97,8 @@
             for (var i = 0; i < payouts.length; i++){
                 if (payouts[i] == 0)
                     break;
-                $("#payouts-table tbody").append('<tr><th scope="row">'+(i+1)+'</th><td>'+payouts[i]+'</td></tr>');
+                var percentage = (Math.round((payouts[i]/(buyIn*players))*10000))/100;
+                $("#payouts-table tbody").append('<tr><th scope="row">'+(i+1)+'</th><td>'+payouts[i]+' ('+percentage+'%)</td></tr>');
             }
             $("#payouts-container").show();
         });
