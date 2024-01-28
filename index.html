@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <title>Poker payout calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #525252;
             color: #fdeab7;
         }
-        .form-text{
+
+        .form-text {
             color: #fdeab7;
         }
     </style>
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png"/>
 </head>
 <body>
 <div class="jumbotron text-center">
@@ -30,12 +34,16 @@
             <form id="payout-form">
                 <div class="mb-3">
                     <label for="players-number" class="form-label">Numero di giocatori</label>
-                    <input type="number" class="form-control" id="players-number" aria-describedby="players-number-help" min="2" value="6" required>
-                    <div id="players-number-help" class="form-text">Numero totale di giocatori inclusi i rebuy (ex. 6 persone di cui 3 rientrate = 9 giocatori)</div>
+                    <input type="number" class="form-control" id="players-number" aria-describedby="players-number-help"
+                           min="2" value="6" required>
+                    <div id="players-number-help" class="form-text">Numero totale di giocatori inclusi i rebuy (ex. 6
+                        persone di cui 3 rientrate = 9 giocatori)
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="buy-in" class="form-text">Buy in</label>
-                    <input type="number" class="form-control" id="buy-in" aria-describedby="buy-in-help" min="1" value="20" required>
+                    <input type="number" class="form-control" id="buy-in" aria-describedby="buy-in-help" min="1"
+                           value="20" required>
                     <div id="buy-in-help" class="form-text">Importo del buy-in</div>
                 </div>
                 <button class="btn btn-primary">Calcola</button>
@@ -55,26 +63,60 @@
         </div>
         <div class="col-sm-12 mt-3">
             <table class="table" id="poker-payout-typical">
-                <tbody><tr><th colspan="4">Typical Poker Payout</th></tr>
-                <tr class="xsmalltext"><td>Players</td><td>1-10</td><td>11-20</td><td>21-30</td></tr>
-                <tr><td class="xsmalltext">1st</td><td>50%</td><td>50%</td><td>40%</td></tr>
-                <tr><td class="xsmalltext">2nd</td><td>30%</td><td>25%</td><td>25%</td></tr>
-                <tr><td class="xsmalltext">3rd</td><td>20%</td><td>15%</td><td>20%</td></tr>
-                <tr><td class="xsmalltext">4th</td><td>-</td><td>10%</td><td>10%</td></tr>
-                <tr><td class="xsmalltext">5th</td><td>-</td><td>-</td><td>&nbsp;5%</td></tr>
-                </tbody></table>
+                <tbody>
+                <tr>
+                    <th colspan="4">Typical Poker Payout</th>
+                </tr>
+                <tr class="xsmalltext">
+                    <td>Players</td>
+                    <td>1-10</td>
+                    <td>11-20</td>
+                    <td>21-30</td>
+                </tr>
+                <tr>
+                    <td class="xsmalltext">1st</td>
+                    <td>50%</td>
+                    <td>50%</td>
+                    <td>40%</td>
+                </tr>
+                <tr>
+                    <td class="xsmalltext">2nd</td>
+                    <td>30%</td>
+                    <td>25%</td>
+                    <td>25%</td>
+                </tr>
+                <tr>
+                    <td class="xsmalltext">3rd</td>
+                    <td>20%</td>
+                    <td>15%</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td class="xsmalltext">4th</td>
+                    <td>-</td>
+                    <td>10%</td>
+                    <td>10%</td>
+                </tr>
+                <tr>
+                    <td class="xsmalltext">5th</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>&nbsp;5%</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function (){
-        $("#payout-form").on("submit", function (e){
+    $(document).ready(function () {
+        $("#payout-form").on("submit", function (e) {
             e.preventDefault();
             $("#payouts-table tbody").empty();
             var players = $("#players-number").val();
             var buyIn = $("#buy-in").val();
-            $("#total").html(players*buyIn);
+            $("#total").html(players * buyIn);
             var payout_percentages = [];
             if (players <= 10)
                 payout_percentages = [.5, .3, .2, 0, 0];
@@ -84,22 +126,22 @@
                 payout_percentages = [.4, .25, .2, .1, .05];
 
             var payouts = [];
-            for (var i = 0; i < payout_percentages.length; i++){
-                payouts.push((buyIn*players) * payout_percentages[i]);
+            for (var i = 0; i < payout_percentages.length; i++) {
+                payouts.push((buyIn * players) * payout_percentages[i]);
             }
 
-            for (var i = payouts.length-1; i >= 0; i--){
-                if (payouts[i] % buyIn != 0){
-                    payouts[i-1] += payouts[i] % buyIn;
-                    payouts[i] = Math.floor(payouts[i]/buyIn)*buyIn;
+            for (var i = payouts.length - 1; i >= 0; i--) {
+                if (payouts[i] % buyIn != 0) {
+                    payouts[i - 1] += payouts[i] % buyIn;
+                    payouts[i] = Math.floor(payouts[i] / buyIn) * buyIn;
                 }
             }
 
-            for (var i = 0; i < payouts.length; i++){
+            for (var i = 0; i < payouts.length; i++) {
                 if (payouts[i] == 0)
                     break;
-                var percentage = (Math.round((payouts[i]/(buyIn*players))*10000))/100;
-                $("#payouts-table tbody").append('<tr><th scope="row">'+(i+1)+'</th><td>'+payouts[i]+' ('+percentage+'%)</td></tr>');
+                var percentage = (Math.round((payouts[i] / (buyIn * players)) * 10000)) / 100;
+                $("#payouts-table tbody").append('<tr><th scope="row">' + (i + 1) + '</th><td>' + payouts[i] + ' (' + percentage + '%)</td></tr>');
             }
             $("#payouts-container").show();
         });
