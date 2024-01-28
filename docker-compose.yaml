@@ -1,0 +1,7 @@
+services:
+  poker:
+    image: httpd
+    ports:
+      - "8091:80"
+    volumes:
+        - ./:/usr/local/apache2/htdocs/
